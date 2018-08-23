@@ -1,6 +1,6 @@
 /*/////////////////////////////////////////////////////////////////////////////
 
-{{ CityScopeJS_Walkability }}
+{{ CityScopeJS_RADAR }}
 Copyright (C) {{ 2018 }}  {{ Ariel Noyman }}
 
 This program is free software: you can redistribute it and/or modify
@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ///////////////////////////////////////////////////////////////////////////////
 
-CityScopeJS_Walkability -- Walkability analysis for various land use types.
+CityScopeJS_RADAR -- RADAR visualization for various land use types.
 "@context": "TBD", "@type": "Person", "address": {
 "@type": "75 Amherst St, Cambridge, MA 02139", "addressLocality":
 "Cambridge", "addressRegion": "MA",}, 
@@ -31,18 +31,8 @@ https://github.com/RELNO]
 
 //fixes Uncaught ReferenceError: regeneratorRuntime is not defined
 import "babel-polyfill";
-import { getCityIO } from "./LOGIC/modules";
-import * as threeSetup from "./GRID/threeSetup";
-import { gridInfo } from "./LOGIC/states";
-import { landUseMap } from "./LOGIC/states";
-import { walkabilityMap } from "./LOGIC/states";
-import { info } from "./UI/ui";
-import { radarInit, radarUpdate } from "./UI/radarSetup";
-import { Maptastic } from "../scripts/UI/maptastic";
-
-//
-// import * as radarChart from "./radar";
-// console.log(radarChart);
+import { info } from "./RADAR/ui";
+import { radarInit, radarUpdate } from "./RADAR/radarSetup";
 
 // global vars for fun
 let tableName = "cityscopeJSwalk";
@@ -50,147 +40,55 @@ let cityIOtableURL =
   "https://cityio.media.mit.edu/api/table/" + tableName.toString();
 
 //update interval
-let interval = 500;
+let interval = 1000;
 
-////////////////////////////////////////
 async function init() {
   info();
-  //call server once at start, just to setup the grid
-  let cityIOdata = await getCityIO(cityIOtableURL);
-
-  //build threejs initial grid on load
-  var initMethod = threeSetup.threeInit(cityIOdata);
-  var grid = initMethod[0];
-  var textHolder = initMethod[1];
-
-  //populate grid with data from cityIO
-  gridInfo(grid, cityIOdata, textHolder);
-
   //init the radar
   let radarChartObj = radarInit();
-  //send a barebone radar to update function
-  stateManager(grid, radarChartObj, cityIOdata, textHolder);
-
-  //Maptastic keystone
-  let radarDiv = document.querySelector("#radarDiv");
-  let infoDiv = document.querySelector("#infoDiv");
-  let logoDiv = document.querySelector("#logoDiv");
-  //ONLY WAY TO M/S THREE.JS
-  let THREEcanvas = document.querySelector("#THREEcanvas");
-
-  Maptastic(THREEcanvas, radarDiv, infoDiv, logoDiv);
+  //send a bare-bone radar to update function
+  cityIOupdater(radarChartObj);
 }
-/////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////
+
 /**
  * state Manager for keyboard input
- * @param grid THREE.js grid.
  * @param initalCityIOdata the results of the init call to cityIO.
  */
 
-function stateManager(grid, radarChartObj, initalCityIOdata) {
-  //paint land use grid at start
-  landUseMap(grid, initalCityIOdata);
-
-  let stateHolder = [];
+function cityIOupdater(radarChartObj) {
   let cityIOdata;
-  let lastUpdateDate = initalCityIOdata.meta.timestamp;
   //loop cityIO update recursively
   setInterval(updateCityIO, interval);
   //update grid if cityIO new data arrives
   async function updateCityIO() {
     //get the data through promise
     cityIOdata = await getCityIO(cityIOtableURL);
-
     // update to radar
-    radarUpdate(cityIOdata, radarChartObj, interval / 2);
-
-    //check for new cityIO update using a timestamp
-    if (lastUpdateDate == cityIOdata.meta.timestamp) {
-      // console.log("no new data");
-      return;
-    }
-    //or, if new cityIO data
-    else {
-      lastUpdateDate = cityIOdata.meta.timestamp;
-      // console.log("New CityIO data");
-      //update the grid info
-      gridInfo(grid, cityIOdata);
-
-      //if stateHolder array has no walkabilityMap setup in it
-      if (stateHolder.length < 2) {
-        landUseMap(grid, cityIOdata);
-      } else {
-        //read state details and make a map in accordance
-        walkabilityMap(grid, stateHolder[0], stateHolder[1], 5);
-      }
-    }
+    radarUpdate(cityIOdata, radarChartObj, 500);
   }
-
-  ////////////////////////////////////////////////////////
-  //set an array of states for demo
-  let statesArr = [
-    ["LU"],
-    ["L", "W"],
-    ["W", "L"],
-    ["L", "P"],
-    ["W", "P"],
-    ["G", "L"]
-  ];
-  let infoDivState = document.querySelector("#infoDivState");
-
-  let statesArrCounter = 0;
-  //also, set key listener
-  document.body.addEventListener("keyup", function(e) {
-    switch (e.keyCode) {
-      //look for these keys
-
-      //case foot pedal
-      case 66:
-        console.log(statesArrCounter, statesArr.length);
-        if (statesArrCounter === 0) {
-          //clean up stateHolder so next cityIO update will recreate land use map
-          stateHolder.splice(0, 5);
-          //make the LU map
-          landUseMap(grid, cityIOdata);
-          infoDivState.innerHTML = "Land Use Map";
-        } else {
-          //put state details in a stateHolder var,
-          //so we can go back and read them after next cityIO update
-          stateHolder.splice(
-            0,
-            2,
-            statesArr[statesArrCounter][0],
-            statesArr[statesArrCounter][1]
-          );
-          //call the map
-          walkabilityMap(
-            grid,
-            statesArr[statesArrCounter][0],
-            statesArr[statesArrCounter][1],
-            5
-          );
-          infoDivState.innerHTML =
-            "Walkability Map from " +
-            statesArr[statesArrCounter][0] +
-            " to " +
-            statesArr[statesArrCounter][1];
-        }
-        //move one state forward every click
-        if (statesArrCounter === statesArr.length - 1) {
-          statesArrCounter = 0;
-        } else {
-          statesArrCounter++;
-        }
-        break;
-      default:
-        landUseMap(grid, cityIOdata);
-        //clean up stateHolder so next cityIO update will recreate land use map
-        stateHolder.splice(0, 5);
-        break;
-    }
-  });
 }
 
-////////////////////////////////////////
+////////////////////////////////////////////////////////////////////
+/**
+ * get cityIO method [uses ES6 polyfill]
+ * @param cityIOtableURL cityIO API endpoint URL
+ */
+
+function getCityIO(cityIOtableURL) {
+  // console.log("trying to fetch " + cityIOtableURL);
+  return fetch(cityIOtableURL)
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(cityIOdata) {
+      // console.log("got cityIO table at " + cityIOdata.meta.timestamp);
+      return cityIOdata;
+    });
+}
+
+////////////////////////////////////////////////////////////////////
+
 //start the app
 init();

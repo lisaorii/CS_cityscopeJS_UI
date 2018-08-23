@@ -54,8 +54,8 @@ export function RadarChart() {
     },
 
     legend: {
-      display: false,
-      symbol: "cross", // 'circle', 'cross', 'diamond', 'triangle-up', 'triangle-down'
+      display: true,
+      symbol: "circle", // 'circle', 'cross', 'diamond', 'triangle-up', 'triangle-down'
       toggle: "circle",
       position: { x: 25, y: 25 }
     },
@@ -344,7 +344,7 @@ export function RadarChart() {
             return (-d * radial_calcs.radius) / options.circles.levels;
           })
           .attr("dy", "0.4em")
-          .style("font-size", "12px")
+          .style("font-size", "10px")
           .attr("fill", "#ffffff")
           .on("mouseover", function(d, i) {
             if (events.axisLabel.mouseover) events.axisLabel.mouseover(d, i);
@@ -440,7 +440,7 @@ export function RadarChart() {
           .enter()
           .append("text")
           .attr("class", "axis_legend")
-          .style("font-size", "15px")
+          .style("font-size", "12px")
           .attr("fill", "#ffffff")
           .attr("text-anchor", "middle")
           .attr("dy", "0.1em")
@@ -1342,6 +1342,8 @@ export function RadarChart() {
       .attr("x", newX)
       .attr("y", newY)
       .text(value)
+      .style("font-size", "10px")
+      .attr("fill", "#ffffff")
       .transition()
       .duration(200)
       .style("opacity", 1);
