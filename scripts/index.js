@@ -53,7 +53,7 @@ async function init() {
 ////////////////////////////////////////////////////////////////////
 
 /**
- * state Manager for keyboard input
+ * updates the radar on interval
  * @param initalCityIOdata the results of the init call to cityIO.
  */
 

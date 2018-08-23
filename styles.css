@@ -24,10 +24,10 @@ body {
 }
 
 .radarDiv {
-  position: fixed;
   z-index: 10;
   width: 600;
   height: 600;
+  margin: auto;
 }
 
 .legend {
