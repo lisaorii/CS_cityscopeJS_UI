@@ -36,11 +36,20 @@ import { radarInit, radarUpdate } from "./RADAR/radarSetup";
 
 // global vars for fun
 let tableName = "cityscopeJSwalk";
+
 let cityIOtableURL =
   "https://cityio.media.mit.edu/api/table/" + tableName.toString();
 
+if (window.location.search) {
+  console.log(window.location.search);
+  cityIOtableURL =
+    "https://cityio.media.mit.edu/api/table/" +
+    window.location.search.substr(1);
+}
+console.log(cityIOtableURL);
+
 //update interval
-let interval = 1000;
+let interval = 2000;
 
 async function init() {
   info();
@@ -66,7 +75,7 @@ function cityIOupdater(radarChartObj) {
     //get the data through promise
     cityIOdata = await getCityIO(cityIOtableURL);
     // update to radar
-    radarUpdate(cityIOdata, radarChartObj, 500);
+    radarUpdate(cityIOdata, radarChartObj, 1500);
   }
 }
 
