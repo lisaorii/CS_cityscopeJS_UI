@@ -19,10 +19,10 @@ export function RadarChart() {
 
     // Margins for the SVG
     margins: {
-      top: 100,
-      right: 100,
-      bottom: 100,
-      left: 100
+      top: 200,
+      right: 200,
+      bottom: 200,
+      left: 200
     },
 
     circles: {

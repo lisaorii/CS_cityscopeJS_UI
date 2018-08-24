@@ -1,10 +1,18 @@
-# Walkability Simulation for CityScopeJS
+# CityScope UI components for the Web
+
+![alt text](./DOCS/r.gif "Logo Title Text 1")
+
+- Clone & run with `npm install`, `npm start`
+- edit `radarMath.js` to add math functions on `cityIO` data [or any other data you're calling in `index.js`]
+- edit/add/remove/compare radar axes in `radarMath.js`
+
+---
 
 ## how to build with `parcel` for GitHub pages
 
 ### Building production into `dist` folder
 
-`sudo parcel build index.html --public-url https://cityscope.media.mit.edu/CS_CityScopeJS_Walk/`
+`sudo parcel build index.html --public-url https://cityscope.media.mit.edu/CS_CityScopeJS_UI/`
 
 ## Deploying `dist` to GitHub Pages
 
@@ -49,3 +57,8 @@ If this gets an error [see below], try `force` push:
 ```sh
 git push origin `git subtree split --prefix dist master`:gh-pages --force
 ```
+
+---
+
+radar core from taken from [Charles Allen's block](http://bl.ocks.org/TennisVisuals/c591445c3e6773c6eb6f)
+Maintained by [Ariel Noyman](http://arielnoyman.com)
