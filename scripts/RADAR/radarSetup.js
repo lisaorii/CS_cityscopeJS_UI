@@ -37,8 +37,6 @@ export function radarInit() {
   var radarChartOptions = {
     width: inHi,
     height: inHi,
-    // width: 800,
-    // height: 800,
     color: color
   };
   //call the radar function for init
