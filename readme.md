@@ -3,6 +3,7 @@
 ![alt text](./DOCS/r.gif "Logo Title Text 1")
 
 #### Live example here:
+
 https://cityscope.media.mit.edu/CS_CityScopeJS_UI/
 
 Add `?TABLE_NAME` to URL to get radar for a specific CityScope table, i.e:
@@ -10,7 +11,7 @@ Add `?TABLE_NAME` to URL to get radar for a specific CityScope table, i.e:
 
 #### Development
 
-- Clone & run with `npm install`, `npm start`
+- Clone & run with `npm install`, `npm test`
 - edit `radarMath.js` to add math functions on `cityIO` data [or any other data you're calling in `index.js`]
 - edit/add/remove/compare radar axes in `radarMath.js`
 
