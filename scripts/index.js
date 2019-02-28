@@ -35,7 +35,7 @@ import { info } from "./RADAR/ui";
 import { radarInit, radarUpdate } from "./RADAR/radarSetup";
 
 // global vars for fun
-let tableName = "cityscopeJSwalk";
+let tableName = "grasbrook";
 
 let cityIOtableURL =
   "https://cityio.media.mit.edu/api/table/" + tableName.toString();
