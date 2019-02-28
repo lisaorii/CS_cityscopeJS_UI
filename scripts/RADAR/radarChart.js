@@ -19,10 +19,10 @@ export function RadarChart() {
 
     // Margins for the SVG
     margins: {
-      top: 200,
-      right: 200,
-      bottom: 200,
-      left: 200
+      top: 100,
+      right: 100,
+      bottom: 100,
+      left: 100
     },
 
     circles: {
@@ -794,8 +794,8 @@ export function RadarChart() {
         var range = ranges[axes[i]] // already started?
           ? ranges[axes[i]]
           : options.axes.ranges[axes[i]] // rande defined in options?
-            ? options.axes.ranges[axes[i]].slice()
-            : [0, 1]; // default
+          ? options.axes.ranges[axes[i]].slice()
+          : [0, 1]; // default
         var max = d.value > range[1] ? d.value : range[1];
         var min = d.value < range[0] ? d.value : range[0];
         ranges[axes[i]] = [min, max]; // update
