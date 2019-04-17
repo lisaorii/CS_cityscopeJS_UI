@@ -1,10 +1,8 @@
 # #!/bin/bash
 # clear dist folder 
 sudo rm -rf dist
-# set the remote to new forked
-git remote set-url origin https://github.com/CityScope/CS_CityScopeJS_UI/
 # build the dist for public url 
-sudo parcel build js/index.html --public-url https://github.com/CityScope/CS_CityScopeJS_UI/
+sudo parcel build index.html --public-url https://github.com/CityScope/CS_CityScopeJS_UI/
 # make sure to add dist to commit if .gitignored 
 git add dist -f
 #commit the GH pages changes 
