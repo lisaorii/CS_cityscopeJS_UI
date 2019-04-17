@@ -9,6 +9,6 @@ export function info() {
   var logo = document.createElement("img");
   logo.src = logoPath.default;
   logoDiv.appendChild(logo);
-  logo.width = 100;
-  logo.height = 100;
+  logo.width = 80;
+  logo.height = 80;
 }

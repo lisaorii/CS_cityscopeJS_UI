@@ -3,6 +3,5 @@
 /.cache
 .DS_Store
 .vscode
-dist/
 /dist
 

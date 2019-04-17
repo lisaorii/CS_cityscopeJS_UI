@@ -1,10 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 
 body {
-  /* background-color: rgb(4, 13, 29); */
-  background-color: black;
+  background-color: rgb(4, 13, 29);
   font-family: "Roboto", sans-serif;
   font-weight: lighter;
+  margin: auto;
+  max-width: 70%;
 }
 
 .infoDiv {
@@ -19,18 +20,13 @@ body {
 .logoDiv {
   position: fixed;
   padding-top: 1rem;
-  width: 100;
-  height: 100;
+  width: 30;
+  height: 30;
   z-index: 1000;
 }
 
 .radarDiv {
   z-index: 10;
-  width: 100%;
-  height: 100%;
-  margin: auto;
-  vertical-align: middle;
-  margin: auto !important;
 }
 
 .legend {
