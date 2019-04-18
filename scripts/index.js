@@ -44,6 +44,7 @@ function cityIOupdater(radarChartObj) {
   async function updateCityIO() {
     //get the data through promise
     cityIOdata = await getCityIO(cityIOtableURL);
+    console.log(cityIOdata)
     // update to radar
     radarUpdate(cityIOdata, radarChartObj, interval);
   }
