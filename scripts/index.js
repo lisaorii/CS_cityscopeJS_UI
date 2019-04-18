@@ -5,7 +5,7 @@ import { radarInit, radarUpdate } from "./RADAR/radarSetup";
 import * as cityIOdemo from "./cityio_demo.json";
 
 // global vars for fun
-let tableName = "grasbrook";
+let tableName = "mocho";
 
 let cityIOtableURL =
   "https://cityio.media.mit.edu/api/table/" + tableName.toString();
@@ -44,7 +44,7 @@ function cityIOupdater(radarChartObj) {
   async function updateCityIO() {
     //get the data through promise
     cityIOdata = await getCityIO(cityIOtableURL);
-    console.log(cityIOdata)
+
     // update to radar
     radarUpdate(cityIOdata, radarChartObj, interval);
   }
@@ -57,7 +57,7 @@ function cityIOupdater(radarChartObj) {
  */
 
 export function getCityIO(cityIOtableURL) {
-  return cityIOdemo;
+  // return cityIOdemo;
   // console.log("trying to fetch " + cityIOtableURL);
   return fetch(cityIOtableURL)
     .then(function(response) {
