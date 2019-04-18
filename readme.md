@@ -1,6 +1,3 @@
-# # Note: Repo is no longer maintained here, check the fork @ https://github.com/CityScope
-
-
 # CityScope UI components for the Web
 
 ![alt text](./DOCS/r.gif "Logo Title Text 1")
