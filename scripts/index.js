@@ -5,7 +5,7 @@ import { radarInit, radarUpdate } from "./RADAR/radarSetup";
 import * as cityIOdemo from "./cityio_demo.json";
 
 // global vars for fun
-let tableName = "mocho";
+let tableName = "grasbrook";
 
 let cityIOtableURL =
   "https://cityio.media.mit.edu/api/table/" + tableName.toString();

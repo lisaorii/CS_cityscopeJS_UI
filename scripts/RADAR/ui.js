@@ -9,10 +9,9 @@ export function info() {
   var logo = document.createElement("img");
   logo.src = logoPath.default;
   logoDiv.appendChild(logo);
-  logo.width = 80;
-  logo.height = 80;
+  logo.width = 50;
+  logo.height = 50;
 
-  let text = 0;
   let textDiv = document.createElement("div");
   document.body.appendChild(textDiv);
   textDiv.id = "textDiv";
