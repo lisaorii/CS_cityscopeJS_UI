@@ -40,11 +40,13 @@ RadarData() {
     let d = this.data.grid;
 
     for (let i = 0; i < d.length; i++) {
-      if (d[i].toString() === type) {
+      //console.log("wtf: " + d[i][0].toString());
+      if (d[i][0].toString() === type) {
         ratioCount += 1;
       }
     }
-    return ratioCount / d.length;
+    //console.log("there is : " + ratioCount + " type " + type);
+    return (ratioCount/d.length)*10;
   }
   ///////////////////////////
 
@@ -54,16 +56,37 @@ RadarData() {
     let d = this.data.grid;
 
     for (let i = 0; i < d.length; i++) {
-      if (d[i].toString() === type1) {
+      if (d[i][0].toString() === type1) {
         rc1 += 1;
-      } else if (d[i].toString() === type2) {
+      } else if (d[i][0].toString() === type2) {
         rc2 += 1;
       } else {
         // return;
         continue;
       }
     }
-    return rc2 / rc1;
+    return (rc2  / rc1);
+  }
+
+
+  ratioOfTypes(type1, type2, type3) {
+    let rc1 = 0;
+    let rc2 = 0;
+    let rc3 = 0;
+    let d = this.data.grid;
+
+    for (let i = 0; i < d.length; i++) {
+      if (d[i][0].toString() === type1) {
+        rc1 += 1;
+      } 
+      if (d[i][0].toString() === type2) {
+        rc2 += 1;
+      } 
+      if (d[i][0].toString() === type3) {
+        rc3 += 1;
+      } 
+    }
+    return (rc1+rc2+rc3)/d.length;
   }
   ///////////////////////////
 
@@ -83,13 +106,14 @@ export function radarStruct(radarMath) {
     {
       key: "BostonDYNAMIC",
       values: [
-        { axis: "Residentia Density", value: 0.70 + radarMath.typeRatio("0") },
-        { axis: "Employment Density", value: 0.57 + radarMath.typeRatio("1") },
+        { //axis: "Residential Density", value: 0.70 + radarMath.ratioOfTypes("0","1","2") }
+        axis: "Residential Density", value: 0.70 + radarMath.ratioOfTypes("0","1","2") },
+        { axis: "Employment Density", value: 0.57 + radarMath.typeRatio("0") },
         { axis: "3rd places (day) Density", value: 0.40 + radarMath.ratioLiveWork("2", "0") },
         { axis: "3rd places (Night) Density", value: 0.20 + radarMath.uniqueTypes("1") },
         { axis: "Cultural Density", value: 0.50 + radarMath.uniqueTypes("1") },
         { axis: "Co-working Density", value: 0.55 + radarMath.typeRatio("3") },
-        { axis: "Educational Density", value: 0.60 + radarMath.typeRatio("1") },
+        { axis: "Educational Density", value: 0.60 + (radarMath.typeRatio("1"))*0.5 },
         { axis: "Access to Parks", value: 0.45 + radarMath.typeRatio("3") },
         { axis: "Access to public Transport", value: 0.50 + radarMath.typeRatio("3") },
         { axis: "Intersection Density", value: 0.40 + radarMath.uniqueTypes("1") },
@@ -100,7 +124,7 @@ export function radarStruct(radarMath) {
         { axis: "Employment Diversity", value: 0.47 + radarMath.typeRatio("3") },
         { axis: "3rd Places Diversity", value: 0.52 + radarMath.typeRatio("3") },
         { axis: "Cultural Diversity", value: 0.45 + radarMath.typeRatio("3") },
-        { axis: "Educational Diversity", value: 0.50 + radarMath.timeRemap("1") }
+        { axis: "Educational Diversity", value: 0.50 + radarMath.timeRemap("1")*1000 }
         //axis: "Educational Diversity", value: 0.50 + radarMath.timeRemap() }
       ]
     },
