@@ -36,7 +36,7 @@ export function RadarChart() {
 
     areas: {
       colors: {}, // color lookup by key
-      opacity: 0.35,
+      opacity: 0.15,
       borderWidth: 2,
       rounded: false,
       dotRadius: 4,
