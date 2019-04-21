@@ -36,10 +36,10 @@ export function RadarChart() {
 
     areas: {
       colors: {}, // color lookup by key
-      opacity: 0.35,
-      borderWidth: 2,
+      opacity:  0.12, //{},
+      borderWidth: 2.5,
       rounded: false,
-      dotRadius: 4,
+      dotRadius: 1.5,
       sort: true, // sort layers by approximation of size, smallest on top
       filter: []
     },

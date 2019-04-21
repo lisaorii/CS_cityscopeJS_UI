@@ -24,20 +24,22 @@ export function radarUpdate(cityIOjson, radarChartObj, interval) {
 // let radarChartMethod;
 
 export function radarInit() {
-  var globalColors = ["#ff48c4", "#2bd1fc"];
-
+  var globalColors = ["rgba(0,204,0,1)", "rgba(51,153,255,1)", "rgba(0,76,153,1)", ];
+ 
   let radarDiv = document.createElement("div");
   radarDiv.id = "radarDiv";
   radarDiv.className = "radarDiv";
   document.body.appendChild(radarDiv);
   //
   var color = d3.scale.ordinal().range(globalColors);
+  
   //size of radar
   let inHi = window.innerHeight;
   var radarChartOptions = {
     width: inHi,
     height: inHi,
     color: color
+    //opacity: opacity
   };
   //call the radar function for init
   let radarChartObj = RadarChart();
