@@ -3,6 +3,17 @@ import { getCityIO } from "./index";
 //a class to preform math on data arriving from cityIO and return to radar
 ////////////////////////////////////////////////////////////////////////////////////
 
+//Existing Types:
+//0 - road
+//1 - RL
+//2 - RS
+//3 - OL
+//4 - OS - no
+//5 - RM - no
+//6 - OM - no
+
+ ///////////////////////////
+
 export class RadarMath {
   constructor(data) {
     this.data = data;
@@ -45,34 +56,65 @@ RadarData() {
         ratioCount += 1;
       }
     }
+    console.log(type);
     //console.log("there is : " + ratioCount + " type " + type);
     return (ratioCount/d.length)*10;
   }
   ///////////////////////////
 
-  ratioLiveWork(type1, type2) {
+  ratioHouse(type1, type2, type5) {
     let rc1 = 0;
     let rc2 = 0;
+    let rc5 = 0;
+  
     let d = this.data.grid;
 
     for (let i = 0; i < d.length; i++) {
       if (d[i][0].toString() === type1) {
         rc1 += 1;
-      } else if (d[i][0].toString() === type2) {
+      } 
+      if (d[i][0].toString() === type2) {
         rc2 += 1;
-      } else {
-        // return;
-        continue;
-      }
+      } 
+      if (d[i][0].toString() === type5) {
+        rc5 += 1;
+      } 
     }
-    return (rc2  / rc1);
+    return ((rc1+rc2+rc5))/d.length;
   }
 
+ ///////////////////////////
 
-  ratioOfTypes(type1, type2, type3) {
+ ratioOffice(type3, type4, type6) {
+  let rc3 = 0;
+  let rc4 = 0;
+  let rc6 = 0;
+
+  let d = this.data.grid;
+
+  for (let i = 0; i < d.length; i++) {
+    if (d[i][0].toString() === type3) {
+      rc3 += 1;
+    } 
+    if (d[i][0].toString() === type4) {
+      rc4 += 1;
+    } 
+    if (d[i][0].toString() === type6) {
+      rc6 += 1;
+    } 
+  }
+  return ((rc3+rc4+rc6))/d.length;
+}
+
+ ///////////////////////////
+ 
+ ratioLiveWork(type1, type2, type3, type4, type5, type6) {
     let rc1 = 0;
     let rc2 = 0;
     let rc3 = 0;
+    let rc4 = 0;
+    let rc5 = 0;
+    let rc6 = 0;
     let d = this.data.grid;
 
     for (let i = 0; i < d.length; i++) {
@@ -85,10 +127,77 @@ RadarData() {
       if (d[i][0].toString() === type3) {
         rc3 += 1;
       } 
+      if (d[i][0].toString() === type4) {
+        rc4 += 1;
+      } 
+      if (d[i][0].toString() === type5) {
+        rc5 += 1;
+      } 
+      if (d[i][0].toString() === type6) {
+        rc6 += 1;
+      } 
     }
-    return (rc1+rc2+rc3)/d.length;
+    return ((rc1+rc2+rc5)/(rc3+rc4+rc6))/d.length;
   }
   ///////////////////////////
+ 
+ 
+  ratioOfHousingTypes(type1, type2, type5) {
+    let rc1 = 0;
+    let rc2 = 0;
+    let rc5 = 0;
+    let d = this.data.grid;
+
+    for (let i = 0; i < d.length; i++) {
+  
+      if (d[i][0].toString() === type1) {
+        rc1 += 1;
+      } 
+      if (d[i][0].toString() === type2) {
+        rc2 += 1;
+      } 
+      if (d[i][0].toString() === type5) {
+        rc5 += 1;
+      } 
+    }
+    return (rc1+rc2+rc5)/d.length;
+  }
+ 
+  ///////////////////////////
+
+ 
+ ratioOfBuiltSpace(type1, type2, type3, type4, type5, type6) {
+  let rc1 = 0;
+  let rc2 = 0;
+  let rc3 = 0;
+  let rc4 = 0;
+  let rc5 = 0;
+  let rc6 = 0;
+  let d = this.data.grid;
+
+  for (let i = 0; i < d.length; i++) {
+    if (d[i][0].toString() === type1) {
+      rc1 += 1;
+    } 
+    if (d[i][0].toString() === type2) {
+      rc2 += 1;
+    } 
+    if (d[i][0].toString() === type3) {
+      rc3 += 1;
+    } 
+    if (d[i][0].toString() === type4) {
+      rc4 += 1;
+    } 
+    if (d[i][0].toString() === type5) {
+      rc5 += 1;
+    } 
+    if (d[i][0].toString() === type6) {
+      rc6 += 1;
+    } 
+  }
+  return (((rc1+rc2+rc5+rc3+rc4+rc6)))/d.length;
+}
+ ///////////////////////////
 
   timeRemap() {
     var cityioTime = this.data.meta.timestamp;
@@ -107,24 +216,24 @@ export function radarStruct(radarMath) {
       key: "BostonDYNAMIC",
       values: [
         { //axis: "Residential Density", value: 0.70 + radarMath.ratioOfTypes("0","1","2") }
-        axis: "Residential Density", value: 0.70 + radarMath.ratioOfTypes("0","1","2") },
-        { axis: "Employment Density", value: 0.57 + radarMath.typeRatio("0") },
-        { axis: "3rd places (day) Density", value: 0.40 + radarMath.ratioLiveWork("2", "0") },
-        { axis: "3rd places (Night) Density", value: 0.20 + radarMath.uniqueTypes("1") },
-        { axis: "Cultural Density", value: 0.50 + radarMath.uniqueTypes("1") },
-        { axis: "Co-working Density", value: 0.55 + radarMath.typeRatio("3") },
-        { axis: "Educational Density", value: 0.60 + (radarMath.typeRatio("1"))*0.5 },
-        { axis: "Access to Parks", value: 0.45 + radarMath.typeRatio("3") },
-        { axis: "Access to public Transport", value: 0.50 + radarMath.typeRatio("3") },
-        { axis: "Intersection Density", value: 0.40 + radarMath.uniqueTypes("1") },
-        { axis: "Access to look-out (Police)", value: 0.50 + radarMath.typeRatio("0") },
-        { axis: "Access to Healthy food", value: 0.35 + radarMath.typeRatio("3") },
+        axis: "Residential Density", value: 0.70 + ((radarMath.typeRatio("1")) + (radarMath.typeRatio("2")) + (radarMath.typeRatio("5")))*0.5 },
+        { axis: "Employment Density", value: 0.57 + ((radarMath.typeRatio("3")) + (radarMath.typeRatio("4")) + (radarMath.typeRatio("6")))*0.5 },
+        { axis: "3rd places (day) Density", value: 0.40 + (radarMath.typeRatio("1")*0.05 ) + (radarMath.typeRatio("2") * 1.005) + (radarMath.typeRatio("5")*0.03 ) },
+        { axis: "3rd places (Night) Density", value: 0.20 + (radarMath.typeRatio("1") * 0.05) + (radarMath.typeRatio("2") * 1.003) + (radarMath.typeRatio("3")*0.09 )+ (radarMath.typeRatio("4")*0.003 ) },
+        { axis: "Cultural Density", value: 0.50 + (radarMath.typeRatio("1") * 1.03) + (radarMath.typeRatio("5") * 0.03) + (radarMath.typeRatio("3") * 0.03) },
+        { axis: "Co-working Density", value: 0.55 + radarMath.typeRatio("1") },
+        { axis: "Educational Density", value: 0.60 + (radarMath.ratioOfHousingTypes("1","2", "5"))+(radarMath.ratioOffice("3", "4", "6")) },
+        { axis: "Access to Parks", value: 0.45 +  (((radarMath.ratioOfBuiltSpace("1","2","3","4","5","6"))-(radarMath.typeRatio("1")/3)))*5 },
+        { axis: "Access to public Transport", value: 0.50 + ((radarMath.ratioOfBuiltSpace("1","2","3","4","5","6"))*1.3) },
+        { axis: "Intersection Density", value: 0.40 + radarMath.typeRatio("0") },
+        { axis: "Access to look-out (Police)", value: 0.50 + (radarMath.typeRatio("1"))+(radarMath.typeRatio("3")*0.02)+(radarMath.typeRatio("5")*0.01)+(radarMath.typeRatio("0")/5) },
+        { axis: "Access to Healthy food", value: 0.35 + (radarMath.typeRatio("1"))+(radarMath.typeRatio("5")) },
         { axis: "Access to Sports", value: 0.54 + radarMath.typeRatio("2") },
-        { axis: "Residential Diversity", value: 0.50 + radarMath.typeRatio("3") },
-        { axis: "Employment Diversity", value: 0.47 + radarMath.typeRatio("3") },
-        { axis: "3rd Places Diversity", value: 0.52 + radarMath.typeRatio("3") },
-        { axis: "Cultural Diversity", value: 0.45 + radarMath.typeRatio("3") },
-        { axis: "Educational Diversity", value: 0.50 + radarMath.timeRemap("1")*1000 }
+        { axis: "Residential Diversity", value: 0.50 + radarMath.ratioOfHousingTypes("1","2", "5")*4 },
+        { axis: "Employment Diversity", value: 0.47 + radarMath.ratioOffice("3", "4", "6")*4 },
+        { axis: "3rd Places Diversity", value: 0.52 + ((radarMath.typeRatio("1")) + (radarMath.typeRatio("2")) + (radarMath.typeRatio("5")))/3  },
+        { axis: "Cultural Diversity", value: 0.45 + ((radarMath.typeRatio("1")) + (radarMath.typeRatio("5")) + (radarMath.typeRatio("3")))/3 },
+        { axis: "Educational Diversity", value: 0.50 + (((radarMath.ratioOfHousingTypes("1","2", "5"))+(radarMath.ratioOffice("3", "4", "6"))/3)*5)+(radarMath.timeRemap("1")*500) }
         //axis: "Educational Diversity", value: 0.50 + radarMath.timeRemap() }
       ]
     },
