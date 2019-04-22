@@ -24,7 +24,7 @@ export function radarUpdate(cityIOjson, radarChartObj, interval) {
 // let radarChartMethod;
 
 export function radarInit() {
-  var globalColors = ["#ff48c4", "#2bd1fc", "#2bd14c"];
+  var globalColors = ["#2bd14c", "#2bd1fc", "#FF39F3"];
 
   let radarDiv = document.createElement("div");
   radarDiv.id = "radarDiv";
