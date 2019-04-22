@@ -1,19 +1,22 @@
 {
-  "name": "ui",
+  "name": "18_csjsui",
   "version": "1.0.0",
-  "description": "CS UI",
+  "description": "CityScopeJS UI",
   "main": "index.js",
   "scripts": {
     "test": "parcel index.html"
   },
   "repository": {
-    "type": "git"
+    "type": "git",
+    "url": "git+https://github.com/CityScope/CityScopeJS_UI.git"
   },
   "author": "Ariel Noyman",
   "license": "ISC",
-  "bugs": {},
+  "bugs": {
+    "url": "https://github.com/CityScope/CityScopeJS_UI/issues"
+  },
+  "homepage": "https://github.com/CityScope/CityScopeJS_UI#readme",
   "dependencies": {
-    "@tweenjs/tween.js": "^17.3.0",
     "babel-polyfill": "^6.26.0",
     "core-js": "^2.6.5",
     "d3": "^3.5.17",
