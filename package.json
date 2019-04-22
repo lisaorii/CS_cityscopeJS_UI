@@ -1,5 +1,5 @@
 {
-  "name": "UI",
+  "name": "ui",
   "version": "1.0.0",
   "description": "CS UI",
   "main": "index.js",
@@ -11,8 +11,7 @@
   },
   "author": "Ariel Noyman",
   "license": "ISC",
-  "bugs": {
-  },
+  "bugs": {},
   "dependencies": {
     "@tweenjs/tween.js": "^17.3.0",
     "babel-polyfill": "^6.26.0",
