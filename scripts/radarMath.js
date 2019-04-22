@@ -3,6 +3,17 @@ import { getCityIO } from "./index";
 //a class to preform math on data arriving from cityIO and return to radar
 ////////////////////////////////////////////////////////////////////////////////////
 
+//Existing Types:
+//0 - road
+//1 - RL
+//2 - RS
+//3 - OL
+//4 - OS - no
+//5 - RM - no
+//6 - OM - no
+
+///////////////////////////
+
 export class RadarMath {
   constructor(data) {
     this.data = data;
@@ -49,22 +60,137 @@ export class RadarMath {
   }
   ///////////////////////////
 
-  ratioLiveWork(type1, type2) {
+  ratioHouse(type1, type2, type5) {
     let rc1 = 0;
     let rc2 = 0;
+    let rc5 = 0;
+
     let d = this.data.grid;
 
     for (let i = 0; i < d.length; i++) {
-      if (d[i].toString() === type1) {
+      if (d[i][0].toString() === type1) {
         rc1 += 1;
-      } else if (d[i].toString() === type2) {
+      }
+      if (d[i][0].toString() === type2) {
         rc2 += 1;
-      } else {
-        // return;
-        continue;
+      }
+      if (d[i][0].toString() === type5) {
+        rc5 += 1;
       }
     }
-    return rc2 / rc1;
+    return (rc1 + rc2 + rc5) / d.length;
+  }
+
+  ///////////////////////////
+
+  ratioOffice(type3, type4, type6) {
+    let rc3 = 0;
+    let rc4 = 0;
+    let rc6 = 0;
+
+    let d = this.data.grid;
+
+    for (let i = 0; i < d.length; i++) {
+      if (d[i][0].toString() === type3) {
+        rc3 += 1;
+      }
+      if (d[i][0].toString() === type4) {
+        rc4 += 1;
+      }
+      if (d[i][0].toString() === type6) {
+        rc6 += 1;
+      }
+    }
+    return (rc3 + rc4 + rc6) / d.length;
+  }
+
+  ///////////////////////////
+
+  ratioLiveWork(type1, type2, type3, type4, type5, type6) {
+    let rc1 = 0;
+    let rc2 = 0;
+    let rc3 = 0;
+    let rc4 = 0;
+    let rc5 = 0;
+    let rc6 = 0;
+    let d = this.data.grid;
+
+    for (let i = 0; i < d.length; i++) {
+      if (d[i][0].toString() === type1) {
+        rc1 += 1;
+      }
+      if (d[i][0].toString() === type2) {
+        rc2 += 1;
+      }
+      if (d[i][0].toString() === type3) {
+        rc3 += 1;
+      }
+      if (d[i][0].toString() === type4) {
+        rc4 += 1;
+      }
+      if (d[i][0].toString() === type5) {
+        rc5 += 1;
+      }
+      if (d[i][0].toString() === type6) {
+        rc6 += 1;
+      }
+    }
+    return (rc1 + rc2 + rc5) / (rc3 + rc4 + rc6) / d.length;
+  }
+  ///////////////////////////
+
+  ratioOfHousingTypes(type1, type2, type5) {
+    let rc1 = 0;
+    let rc2 = 0;
+    let rc5 = 0;
+    let d = this.data.grid;
+
+    for (let i = 0; i < d.length; i++) {
+      if (d[i][0].toString() === type1) {
+        rc1 += 1;
+      }
+      if (d[i][0].toString() === type2) {
+        rc2 += 1;
+      }
+      if (d[i][0].toString() === type5) {
+        rc5 += 1;
+      }
+    }
+    return (rc1 + rc2 + rc5) / d.length;
+  }
+
+  ///////////////////////////
+
+  ratioOfBuiltSpace(type1, type2, type3, type4, type5, type6) {
+    let rc1 = 0;
+    let rc2 = 0;
+    let rc3 = 0;
+    let rc4 = 0;
+    let rc5 = 0;
+    let rc6 = 0;
+    let d = this.data.grid;
+
+    for (let i = 0; i < d.length; i++) {
+      if (d[i][0].toString() === type1) {
+        rc1 += 1;
+      }
+      if (d[i][0].toString() === type2) {
+        rc2 += 1;
+      }
+      if (d[i][0].toString() === type3) {
+        rc3 += 1;
+      }
+      if (d[i][0].toString() === type4) {
+        rc4 += 1;
+      }
+      if (d[i][0].toString() === type5) {
+        rc5 += 1;
+      }
+      if (d[i][0].toString() === type6) {
+        rc6 += 1;
+      }
+    }
+    return (rc1 + rc2 + rc5 + rc3 + rc4 + rc6) / d.length;
   }
   ///////////////////////////
 

@@ -32,12 +32,14 @@ export function radarInit() {
   document.body.appendChild(radarDiv);
   //
   var color = d3.scale.ordinal().range(globalColors);
+
   //size of radar
   let inHi = window.innerHeight;
   var radarChartOptions = {
     width: inHi,
     height: inHi,
     color: color
+    //opacity: opacity
   };
   //call the radar function for init
   let radarChartObj = RadarChart();
