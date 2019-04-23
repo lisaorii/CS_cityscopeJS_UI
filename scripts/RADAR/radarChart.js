@@ -114,6 +114,7 @@ export function RadarChart() {
     selection.each(function() {
       dataCalcs();
       radialCalcs();
+    
 
       var dom = d3.select(this);
 
