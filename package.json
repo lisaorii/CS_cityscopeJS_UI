@@ -18,7 +18,7 @@
   "homepage": "https://github.com/CityScope/CityScopeJS_UI#readme",
   "dependencies": {
     "babel-polyfill": "^6.26.0",
-    "core-js": "^2.6.5",
+    "core-js": "^2.6.9",
     "d3": "^3.5.17",
     "regenerator-runtime": "^0.12.1"
   },
