@@ -9,5 +9,5 @@ git add dist -f
 git commit -m "gh-pages commit"
 #push to subtree remote [Force and remove all] 
 git push origin `git subtree split --prefix dist master`:gh-pages --force
-# finally remove dist
-sudo git rm dist -f -r
+# finally remove dist from git 
+sudo it rm -r --cached --ignore-unmatch dist
