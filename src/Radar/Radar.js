@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { CircularGridLines, RadarChart } from "react-vis";
-import DataButton from "../dataButton";
 import "../../node_modules/react-vis/dist/style.css";
 import "./Radar.css";
 
@@ -40,8 +39,11 @@ export default class AnimatedRadar extends Component {
   render() {
     const { data, colorRange } = this.state;
     return (
-      <div className="centered-and-flexed">
+      <div className="Radar">
         <RadarChart
+          onValueMouseOver={() => {
+            this.setState({ data: generateData() });
+          }}
           animation
           data={data}
           domains={DOMAIN}
@@ -86,10 +88,8 @@ export default class AnimatedRadar extends Component {
             tickValues={[...new Array(10)].map((v, i) => i / 10 - 1)}
           />
         </RadarChart>
-        <DataButton
-          onClick={() => this.setState({ data: generateData() })}
-          buttonContent={"UPDATE DATA"}
-        />
+
+        <h1>Radar™</h1>
       </div>
     );
   }

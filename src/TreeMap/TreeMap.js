@@ -1,12 +1,12 @@
 import React from "react";
 import { Treemap } from "react-vis";
-import DataButton from "../dataButton";
+import "./TreeMap.css";
 
 function _getRandomData(total) {
-  const totalLeaves = total || Math.random() * 20;
-  const leaves = [];
-  for (let i = 0; i < totalLeaves; i++) {
-    leaves.push({
+  const totalValues = 20;
+  const values = [];
+  for (let i = 0; i < totalValues; i++) {
+    values.push({
       name: total ? total : String(Math.random()).slice(0, 3),
       size: Math.random() * 1000,
       color: Math.random(),
@@ -17,9 +17,8 @@ function _getRandomData(total) {
   }
 
   let res = {
-    title: "",
-    color: 1,
-    children: leaves
+    color: 0,
+    children: values
   };
   return res;
 }
@@ -28,34 +27,33 @@ export default class TreeMap extends React.Component {
   state = {
     hoveredNode: false,
     treemapData: _getRandomData(20),
-    useCirclePacking: false
+    useCirclePacking: false,
+    mode: "circlePack"
   };
 
   render() {
-    const { hoveredNode, useCirclePacking } = this.state;
     const treeProps = {
       animation: {
-        damping: 1,
-        stiffness: 200
+        damping: 15,
+        stiffness: 600
       },
       data: this.state.treemapData,
-      onLeafMouseOver: x => this.setState({ hoveredNode: x }),
-      onLeafMouseOut: () => this.setState({ hoveredNode: false }),
-      onLeafClick: () => this.setState({ treemapData: _getRandomData() }),
+      onLeafMouseOver: () => {
+        this.setState({ treemapData: _getRandomData() });
+      },
       height: 300,
-      mode: this.state.useCirclePacking ? "circlePack" : "squarify",
+      width: 300,
+      mode: this.state.mode,
       getLabel: x => x.name,
-      width: 350
+      colorRange: ["#79C7E3", "#fc03ec"],
+      opacity: 0.5,
+      strokeWidth: 0.5,
+      hideRootNode: true
     };
     return (
-      <div className="dynamic-treemap-example">
-        <DataButton
-          onClick={() => this.setState({ useCirclePacking: !useCirclePacking })}
-          buttonContent={"TOGGLE CIRCLE PACK"}
-        />
+      <div className="TreeMap">
         <Treemap {...treeProps} />
-        click above to the update data
-        {hoveredNode && hoveredNode.value}
+        <h1>TreeMap</h1>
       </div>
     );
   }

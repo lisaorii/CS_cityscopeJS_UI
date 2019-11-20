@@ -4,3 +4,8 @@
 .rv-xy-plot__axis__tick__line {
   stroke-width: 0.1;
 }
+.Radar {
+  border: 1px solid white;
+  border-radius: 3em;
+  margin: 1em;
+}

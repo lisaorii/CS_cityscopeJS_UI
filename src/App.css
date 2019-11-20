@@ -1,12 +1,20 @@
-.rows {
-  display: flex;
-  flex-direction: row;
-}
-
 body {
   background-color: rgb(0, 0, 0);
   font-family: Helvetica, sans-serif;
   font-size: 10px;
   margin: 0;
   padding: 0;
+}
+
+.rows {
+  display: flex;
+  flex-direction: row;
+}
+
+h1 {
+  display: block;
+  color: white;
+  padding-left: 1em;
+  font-size: 3em;
+  font-weight: bolder;
 }
