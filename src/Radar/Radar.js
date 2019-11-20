@@ -4,17 +4,18 @@ import DataButton from "../dataButton";
 import "../../node_modules/react-vis/dist/style.css";
 import "./Radar.css";
 
+const domainRange = [0, 1];
 const DOMAIN = [
-  { name: "amazing city", domain: [0, 1] },
-  { name: "validated innovation", domain: [0, 1] },
-  { name: "predicted urban happiness", domain: [0, 1] },
-  { name: "mix-use in heaven", domain: [0, 1] },
-  { name: "cool buildings", domain: [0, 1] },
-  { name: "fun crime levels", domain: [0, 1] },
-  { name: "success to all", domain: [0, 1] },
-  { name: "happy agents", domain: [0, 1] },
-  { name: "parking for all", domain: [0, 1] },
-  { name: "yes we no", domain: [0, 1] }
+  { name: "amazing city", domain: domainRange },
+  { name: "validated innovation", domain: domainRange },
+  { name: "predicted urban happiness", domain: domainRange },
+  { name: "mix-use in heaven", domain: domainRange },
+  { name: "cool buildings", domain: domainRange },
+  { name: "fun crime levels", domain: domainRange },
+  { name: "success to all", domain: domainRange },
+  { name: "happy agents", domain: domainRange },
+  { name: "parking bliss", domain: domainRange },
+  { name: "deep swarm chains", domain: domainRange }
 ];
 
 let comparedData = {};
@@ -32,17 +33,19 @@ function generateData() {
 
 export default class AnimatedRadar extends Component {
   state = {
-    data: generateData()
+    data: generateData(),
+    colorRange: ["#fc03ec", "#79C7E3"]
   };
 
   render() {
-    const { data } = this.state;
+    const { data, colorRange } = this.state;
     return (
       <div className="centered-and-flexed">
         <RadarChart
           animation
           data={data}
           domains={DOMAIN}
+          colorRange={colorRange}
           style={{
             polygons: {
               fillOpacity: 0.2,
@@ -59,7 +62,7 @@ export default class AnimatedRadar extends Component {
             labels: {
               textAnchor: "middle",
               fontSize: 10,
-              fontWeight: "bolder",
+              fontWeight: "100",
               fill: "white"
             }
           }}
@@ -69,8 +72,8 @@ export default class AnimatedRadar extends Component {
             bottom: 100,
             right: 100
           }}
-          width={500}
-          height={500}
+          width={600}
+          height={600}
         >
           <CircularGridLines
             style={{
