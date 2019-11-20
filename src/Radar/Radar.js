@@ -40,6 +40,20 @@ export default class AnimatedRadar extends Component {
     const { data, colorRange } = this.state;
     return (
       <div className="Radar">
+        <div className="rows">
+          <h1>Radar™</h1>
+          <div className="radarText">
+            This is my radar. There are many like it, but this one is mine. It
+            is my life. I must master it as I must master my life. Without me my
+            radar is useless. Without my radar, I am useless. I must fire my
+            radar true. I must radar better than the enemy who is trying to
+            barchart me. I must radar him before he barchart me. I will. My
+            radar and I know that what counts in science is not the indicators
+            we measure, the noise of our burst, or the smoke we make. We know
+            that it is the parameters that count. We will radar.
+          </div>
+        </div>
+
         <RadarChart
           onValueMouseOver={() => {
             this.setState({ data: generateData() });
@@ -74,8 +88,8 @@ export default class AnimatedRadar extends Component {
             bottom: 100,
             right: 100
           }}
-          width={600}
-          height={600}
+          width={450}
+          height={450}
         >
           <CircularGridLines
             style={{
@@ -88,8 +102,6 @@ export default class AnimatedRadar extends Component {
             tickValues={[...new Array(10)].map((v, i) => i / 10 - 1)}
           />
         </RadarChart>
-
-        <h1>Radar™</h1>
       </div>
     );
   }
