@@ -1,0 +1,14 @@
+body {
+  background-color: black;
+  font-family: Helvetica, sans-serif;
+  font-size: 10px;
+  margin: 0;
+  padding: 0;
+}
+
+.rv-xy-plot__axis__line {
+  stroke-width: 0.2;
+}
+.rv-xy-plot__axis__tick__line {
+  stroke-width: 0.1;
+}
