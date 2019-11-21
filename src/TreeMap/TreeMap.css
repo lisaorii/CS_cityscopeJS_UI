@@ -9,3 +9,7 @@
   font-size: 8px;
   color: white;
 }
+
+.rv-treemap__leaf--circle {
+  border: none !important;
+}

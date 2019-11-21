@@ -41,19 +41,18 @@ export default class TreeMap extends React.Component {
       onLeafMouseOver: () => {
         this.setState({ treemapData: _getRandomData() });
       },
-      height: 200,
-      width: 200,
+      height: 300,
+      width: 300,
       mode: this.state.mode,
       getLabel: x => x.name,
       colorRange: ["#79C7E3", "#fc03ec"],
-      opacity: 0.5,
-      strokeWidth: 0.5,
+      opacity: 0.9,
       hideRootNode: true
     };
     return (
       <div className="TreeMap">
         <Treemap {...treeProps} />
-        <h1>TreeMap</h1>
+        <h1>Not Radar 1</h1>
       </div>
     );
   }
