@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f07e337c9e8750700a8930b799d40f9d",
+    "revision": "eb682807f4c45d0136337f5ac9cba068",
     "url": "/CS_cityscopeJS_UI/index.html"
   },
   {
@@ -8,15 +8,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/CS_cityscopeJS_UI/static/css/2.5a2f7233.chunk.css"
   },
   {
-    "revision": "b6314a67a62e32a23e58",
-    "url": "/CS_cityscopeJS_UI/static/css/main.4b5d4880.chunk.css"
+    "revision": "7931da9500a61cfd063b",
+    "url": "/CS_cityscopeJS_UI/static/css/main.56bf63ba.chunk.css"
   },
   {
     "revision": "897ca34d85c6c6066656",
     "url": "/CS_cityscopeJS_UI/static/js/2.23a927f4.chunk.js"
   },
   {
-    "revision": "b6314a67a62e32a23e58",
+    "revision": "7931da9500a61cfd063b",
     "url": "/CS_cityscopeJS_UI/static/js/main.9f807189.chunk.js"
   },
   {
