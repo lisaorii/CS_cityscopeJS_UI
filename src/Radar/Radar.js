@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { CircularGridLines, RadarChart } from "react-vis";
 import "../../node_modules/react-vis/dist/style.css";
 import "./Radar.css";
+import CityIO from "../cityIO/cityIO";
+
+let cityioMeta;
 
 const domainRange = [0, 1];
 const DOMAIN = [
@@ -32,11 +35,14 @@ function generateData() {
 
 export default class AnimatedRadar extends Component {
   state = {
+    cityioMeta: this.cityioMeta,
     data: generateData(),
     colorRange: ["#fc03ec", "#79C7E3"]
   };
 
   render() {
+    console.log(cityioMeta);
+
     const { data, colorRange } = this.state;
     return (
       <div className="Radar">
