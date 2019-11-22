@@ -8,7 +8,7 @@ class CityIO extends Component {
     super(props);
     this.state = {
       cityIOdata: null,
-      waiting: true
+      doneFetching: false
     };
   }
 
@@ -17,20 +17,23 @@ class CityIO extends Component {
   }
   getCityioMeta = () => {
     this.setState({ ...this.state });
-    this.setState({ cityIOdata: null, waiting: true });
+    this.setState({ cityIOdata: null, doneFetching: false });
     fetch(API)
       .then(response => response.json())
       .then(result => {
-        this.setState({ cityIOdata: result, waiting: false });
+        this.setState({ cityIOdata: result, doneFetching: true });
       })
       .catch(e => {
         console.log(e);
-        this.setState({ ...this.state, waiting: false });
+        this.setState({ ...this.state, doneFetching: false });
       });
   };
 
   render = () => (
-    <Radar cityIOdata={this.state.cityIOdata} waiting={this.state.waiting} />
+    <Radar
+      cityIOdata={this.state.cityIOdata}
+      doneFetching={this.state.doneFetching}
+    />
   );
 }
 

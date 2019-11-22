@@ -25,7 +25,7 @@ for (let i in DOMAIN) {
 function generateData(cityioGrid) {
   let radarData = {};
   for (let i in DOMAIN) {
-    let foo = 1 / (cityioGrid[i][0] + 5);
+    let foo = 1 / (cityioGrid[i][0] + 1);
     radarData[DOMAIN[i].name] = foo;
   }
   return [radarData, staticRadarData];
@@ -43,7 +43,7 @@ export default class Radar extends Component {
       <div className="Radar">
         <RadarChart
           onValueMouseOver={() => {
-            if (this.props.cityIOdata != null) {
+            if (this.props.doneFetching) {
               this.setState({
                 data: generateData(this.props.cityIOdata)
               });
