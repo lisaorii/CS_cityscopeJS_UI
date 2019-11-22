@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import { CircularGridLines, RadarChart } from "react-vis";
 import "../../node_modules/react-vis/dist/style.css";
 import "./Radar.css";
-import CityIO from "../cityIO/cityIO";
-
-let cityioMeta;
 
 const domainRange = [0, 1];
 const DOMAIN = [
@@ -20,35 +17,37 @@ const DOMAIN = [
   { name: "deep swarm chains", domain: domainRange }
 ];
 
-let comparedData = {};
+let staticRadarData = {};
 for (let i in DOMAIN) {
-  comparedData[DOMAIN[i].name] = Math.random() * DOMAIN[i].domain[1];
+  staticRadarData[DOMAIN[i].name] = Math.random() * DOMAIN[i].domain[1];
 }
 
-function generateData() {
-  let data = {};
+function generateData(cityioGrid) {
+  let radarData = {};
   for (let i in DOMAIN) {
-    data[DOMAIN[i].name] = Math.random() * DOMAIN[i].domain[1];
+    let foo = 1 / (cityioGrid[i][0] + 5);
+    radarData[DOMAIN[i].name] = foo;
   }
-  return [data, comparedData];
+  return [radarData, staticRadarData];
 }
 
-export default class AnimatedRadar extends Component {
+export default class Radar extends Component {
   state = {
-    cityioMeta: this.cityioMeta,
-    data: generateData(),
+    data: [staticRadarData, staticRadarData],
     colorRange: ["#fc03ec", "#79C7E3"]
   };
 
   render() {
-    console.log(cityioMeta);
-
     const { data, colorRange } = this.state;
     return (
       <div className="Radar">
         <RadarChart
           onValueMouseOver={() => {
-            this.setState({ data: generateData() });
+            if (this.props.cityIOdata != null) {
+              this.setState({
+                data: generateData(this.props.cityIOdata)
+              });
+            }
           }}
           animation
           data={data}
