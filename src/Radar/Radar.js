@@ -37,18 +37,28 @@ export default class Radar extends Component {
     colorRange: ["#fc03ec", "#79C7E3"]
   };
 
+  componentDidUpdate(props) {
+    if (props.doneFetching) {
+      console.log(props);
+
+      this.setState({
+        data: generateData(props.cityIOdata)
+      });
+    }
+  }
+
   render() {
     const { data, colorRange } = this.state;
     return (
       <div className="Radar">
         <RadarChart
-          onValueMouseOver={() => {
-            if (this.props.doneFetching) {
-              this.setState({
-                data: generateData(this.props.cityIOdata)
-              });
-            }
-          }}
+          // onValueMouseOver={() => {
+          //   if (this.props.doneFetching) {
+          //     this.setState({
+          //       data: generateData(this.props.cityIOdata)
+          //     });
+          //   }
+          // }}
           animation
           data={data}
           domains={DOMAIN}
