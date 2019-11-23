@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { CircularGridLines, RadarChart } from "react-vis";
-import "../../node_modules/react-vis/dist/style.css";
+import "../../../node_modules/react-vis/dist/style.css";
 import "./Radar.css";
 
 const domainRange = [0, 1];

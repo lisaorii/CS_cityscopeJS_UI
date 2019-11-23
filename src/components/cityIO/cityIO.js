@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import Radar from "../Radar/Radar";
 import TreeMap from "../TreeMap/TreeMap";
 import SunburstWithTooltips from "../Sunburst/Sunburst";
-import ScaleLoader from "react-spinners/ScaleLoader";
-import { css } from "@emotion/core";
+import Loader from "../Loader";
 
 var tableName = window.location.search.substring(1);
 var cityioHashURL = null;
@@ -67,6 +66,7 @@ class CityIO extends Component {
 
   render = () => (
     <div className="rows">
+      <Loader loading={this.state.doneFetching} />
       <Radar
         cityIOdata={this.state.cityIOdata}
         doneFetching={this.state.doneFetching}
@@ -81,49 +81,8 @@ class CityIO extends Component {
           doneFetching={this.state.doneFetching}
         />
       </div>
-      <ScaleLoader
-        css={css`
-          position: fixed;
-          bottom: 5em;
-        `}
-        sizeUnit={"px"}
-        height={20}
-        width={20}
-        radius={2}
-        color={"white"}
-        loading={this.state.doneFetching}
-      />
     </div>
   );
 }
 
 export default CityIO;
-
-/* 
- ! HOOKS
-function CityIO() {
-
-
-    const [data, setData] = useState({ cityioMeta: null });
-
-  useEffect(() => {
-    const interval = setInterval(_ => {
-      const fetchUsers = async () => {
-        try {
-          setData({ cityioMeta: data });
-          const response = await axios.get(API);
-          setData({ cityioMeta: response.data });
-        } catch (e) {
-          setData({ cityioMeta: data.cityioMeta });
-        }
-      };
-      fetchUsers();
-    }, 1000);
-    return _ => clearInterval(interval);
-  }, []);
-
-  return <Radar data={data} />;
-}
-
-export default CityIO;
-*/
