@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Radar from "../Radar/Radar";
 import TreeMap from "../TreeMap/TreeMap";
 import SunburstWithTooltips from "../Sunburst/Sunburst";
+import ScaleLoader from "react-spinners/ScaleLoader";
+import { css } from "@emotion/core";
 
 var tableName = window.location.search.substring(1);
 var cityioHashURL = null;
@@ -79,6 +81,18 @@ class CityIO extends Component {
           doneFetching={this.state.doneFetching}
         />
       </div>
+      <ScaleLoader
+        css={css`
+          position: fixed;
+          bottom: 5em;
+        `}
+        sizeUnit={"px"}
+        height={20}
+        width={20}
+        radius={2}
+        color={"white"}
+        loading={this.state.doneFetching}
+      />
     </div>
   );
 }

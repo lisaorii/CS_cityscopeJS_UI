@@ -39,8 +39,6 @@ export default class Radar extends Component {
 
   componentDidUpdate(props) {
     if (props.doneFetching) {
-      console.log(props);
-
       this.setState({
         data: generateData(props.cityIOdata)
       });
@@ -52,13 +50,6 @@ export default class Radar extends Component {
     return (
       <div className="Radar">
         <RadarChart
-          // onValueMouseOver={() => {
-          //   if (this.props.doneFetching) {
-          //     this.setState({
-          //       data: generateData(this.props.cityIOdata)
-          //     });
-          //   }
-          // }}
           animation
           data={data}
           domains={DOMAIN}
