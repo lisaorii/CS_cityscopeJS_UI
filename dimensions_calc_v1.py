@@ -41,7 +41,6 @@ for proportion in proportions_of_species:
         
 diversity_total = -diversity_total
 
-#calculate total diversity index by summing the diversity index of each species
 print(diversity_total)
 
 
