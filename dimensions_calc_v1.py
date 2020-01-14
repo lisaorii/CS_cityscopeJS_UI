@@ -14,7 +14,7 @@ area_of_district = 60 #unit is square miles
 occurences = {'employed_people': 400, 'population': 1000} #set of occurences of each building type or population in a district
 
 #variables for Diversity
-proportions_of_species = [0.1, 0.1, 0.2, 0.2, 0.4] #proportion of the population made up of species i of total_species
+proportions_of_species = [0.1, 0.1, 0.2, 0.2, 0.4] #proportion of the population made up of species i
 
 
 
@@ -33,7 +33,7 @@ print(density_dict)
 
 
 
-#Diversity = -[sum of a {proportion of a species i x log(proportion of a species i)} as i goes from 1 to S]
+#Diversity = -[sum of a {proportion of a species i x log(proportion of a species i)} as i goes from 1 to total number of species]
 diversity_total = 0
 
 for proportion in proportions_of_species:
